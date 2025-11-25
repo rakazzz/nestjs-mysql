@@ -7,6 +7,7 @@ import { User } from './user/user.entity';
 import { JandaFormModule } from './janda-form/janda-form.module';
 import { JandaForm } from './janda-form/entities/janda-form.entity';
 import { PenguburanModule } from './penguburan/penguburan.module';
+import { Penguburan } from './penguburan/entities/penguburan.entity';
 
 @Module({
   imports: [
@@ -17,7 +18,7 @@ import { PenguburanModule } from './penguburan/penguburan.module';
       username: process.env.DB_USER,
       password: process.env.DB_PASS,
       database: process.env.DB_NAME,
-      entities: [User, JandaForm],
+      entities: [User, JandaForm, Penguburan],
       synchronize: true,
     }),
     UserModule,
