@@ -11,11 +11,11 @@ import { JandaForm } from './janda-form/entities/janda-form.entity';
   imports: [
     TypeOrmModule.forRoot({
       type: 'mysql',
-      host: 'localhost',
+      host: process.env.DB_HOST,
       port: 3306,
-      username: 'root',
-      password: '',
-      database: 'dbform',
+      username: process.env.DB_USER,
+      password: process.env.DB_PASS,
+      database: process.env.DB_NAME,
       entities: [User, JandaForm],
       synchronize: true,
     }),
