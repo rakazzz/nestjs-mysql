@@ -1,6 +1,7 @@
 import { User } from "src/user/user.entity";
-import { Column, CreateDateColumn, JoinColumn, ManyToOne, PrimaryGeneratedColumn } from "typeorm";
+import { Column, CreateDateColumn, Entity, JoinColumn, ManyToOne, PrimaryGeneratedColumn } from "typeorm";
 
+@Entity()
 export class Penguburan {
     @PrimaryGeneratedColumn()
     id: number;
