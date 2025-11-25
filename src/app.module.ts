@@ -6,6 +6,7 @@ import { UserModule } from './user/user.module';
 import { User } from './user/user.entity';
 import { JandaFormModule } from './janda-form/janda-form.module';
 import { JandaForm } from './janda-form/entities/janda-form.entity';
+import { PenguburanModule } from './penguburan/penguburan.module';
 
 @Module({
   imports: [
@@ -21,6 +22,7 @@ import { JandaForm } from './janda-form/entities/janda-form.entity';
     }),
     UserModule,
     JandaFormModule,
+    PenguburanModule,
   ],
   controllers: [AppController],
   providers: [AppService],
