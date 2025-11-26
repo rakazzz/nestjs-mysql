@@ -18,6 +18,7 @@ export class UserService {
         return this.userRepository.find({
             relations:{
                 suketJandaPemohon: true,
+                suketPenguburanPemohon: true,
             }
         });
     }
@@ -27,6 +28,7 @@ export class UserService {
             where:{nik: nikUser},
             relations: {
                 suketJandaPemohon: true,
+                suketPenguburanPemohon: true,
             }
         });
 
