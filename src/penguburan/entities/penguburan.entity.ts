@@ -7,7 +7,7 @@ export class Penguburan {
     id: number;
 
     @ManyToOne(() => User, (user) => user.suketPenguburanPemohon)
-    @JoinColumn({referencedColumnName: 'nik'}) 
+    @JoinColumn({referencedColumnName: 'nik'})
     pemohon: User;
     
     @Column()

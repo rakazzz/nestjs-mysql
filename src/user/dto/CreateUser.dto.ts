@@ -1,3 +1,4 @@
+import { Transform } from "class-transformer";
 import { IsNumberString, IsString, MaxLength } from "class-validator";
 
 export class CreateUserDto {

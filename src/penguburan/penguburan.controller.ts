@@ -21,6 +21,11 @@ export class PenguburanController {
   findOne(@Param('id') id: string) {
     return this.penguburanService.findOne(+id);
   }
+  
+  @Get('nik/:nik')
+  findByNik(@Param('nik') nik: string) {
+    return this.penguburanService.findByNik(nik);
+  }
 
   @Patch(':id')
   update(@Param('id') id: string, @Body() updatePenguburanDto: UpdatePenguburanDto) {
