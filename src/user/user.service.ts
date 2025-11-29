@@ -19,6 +19,8 @@ export class UserService {
             relations:{
                 suketJandaPemohon: true,
                 suketPenguburanPemohon: true,
+                suketKeramaianPemohon: true,
+                suketPenutupanPemohon: true,
             }
         });
     }
@@ -29,6 +31,8 @@ export class UserService {
             relations: {
                 suketJandaPemohon: true,
                 suketPenguburanPemohon: true,
+                suketKeramaianPemohon: true,
+                suketPenutupanPemohon: true,
             }
         });
 

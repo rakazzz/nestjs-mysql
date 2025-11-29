@@ -1,4 +1,4 @@
-import { IsEnum, IsNotEmpty, IsNumberString, IsString, IsUrl, MaxLength } from "class-validator";
+import { IsEnum, IsNotEmpty, IsNumberString, IsString, IsUrl, Max, MaxLength } from "class-validator";
 
 
 enum Gender {
@@ -52,6 +52,11 @@ export class CreatePenguburanDto {
     @IsString()
     @IsNotEmpty()
     readonly tempatMeninggal: string;
+
+    @IsString()
+    @IsNotEmpty()
+    @MaxLength(20)
+    readonly akibat: string;
 
     @IsString()
     @IsUrl()

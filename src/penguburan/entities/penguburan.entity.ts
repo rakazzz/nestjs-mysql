@@ -20,6 +20,9 @@ export class Penguburan {
     tempatMeninggal: string;
 
     @Column()
+    akibat: string;
+
+    @Column()
     pdfPath: string;
     
         // @Column()

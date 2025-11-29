@@ -18,7 +18,7 @@ export class PenguburanService {
   ) {}
   async create(createPenguburanDto: CreatePenguburanDto) {
 
-    const {namaAlm, nikAlm, tempatLahirAlm, tglLahirAlm, genderAlm, pekerjaanAlm, alamatAlm, tglMeninggal, waktuMeninggal, tempatMeninggal, pdfPath, statusData} = createPenguburanDto;
+    const {namaAlm, nikAlm, tempatLahirAlm, tglLahirAlm, genderAlm, pekerjaanAlm, alamatAlm, tglMeninggal, waktuMeninggal, tempatMeninggal, akibat, pdfPath, statusData} = createPenguburanDto;
 
     let user = await this.userRepository.findOneBy({nik: nikAlm});
 
@@ -38,6 +38,8 @@ export class PenguburanService {
       pemohon: user,
       tglMeninggal,
       waktuMeninggal,
+      tempatMeninggal,
+      akibat,
       pdfPath,
       statusData
     })
