@@ -1,6 +1,6 @@
 import { Injectable } from "@nestjs/common";
 import { User } from "src/user/user.entity";
-import { Column, Entity, JoinColumn, ManyToOne, PrimaryGeneratedColumn } from "typeorm";
+import { Column, CreateDateColumn, Entity, JoinColumn, ManyToOne, PrimaryGeneratedColumn } from "typeorm";
 
 @Entity()
 export class Penutupan {
@@ -26,6 +26,9 @@ export class Penutupan {
     @Column()
     pdfPath: string;
 
+    @CreateDateColumn()
+    tanggal: Date;
+        
     @Column()
     statusData: string;
 }

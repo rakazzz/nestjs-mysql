@@ -74,7 +74,17 @@ constructor(
   }
 
   async update(id: number, updateKeramaianDto: UpdateKeramaianDto) {
-    return this.keramaianRepository.update(id, updateKeramaianDto);
+    const update = await this.keramaianRepository.update(id, updateKeramaianDto)
+    if (update.affected === 0) {
+      return {
+        message: 'Keramaian Form not found or no changes made',
+        updated: 0,
+      };
+    }
+    return {
+      message: 'Kermaian Form updated successfully',
+      updated: update.affected,
+    };
   }
 
   async remove(id: number) {

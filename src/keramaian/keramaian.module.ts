@@ -8,6 +8,7 @@ import { User } from 'src/user/user.entity';
 @Module({
   imports:[TypeOrmModule.forFeature([Keramaian, User])],
   controllers: [KeramaianController],
+  exports: [KeramaianService],
   providers: [KeramaianService],
 })
 export class KeramaianModule {}

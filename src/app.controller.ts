@@ -26,6 +26,13 @@ export class AppController {
     return req.user;
   }
 
+  @Public()
+  @Post('auth/refresh-token')
+    async refreshToken(@Body('refresh_token') refreshToken: string) {
+      return this.authService.refreshAccessToken(refreshToken);
+
+  }
+
   @Post('auth/signup')
   async signup(@Request() req) {
     return this.authService.signup(req.body);

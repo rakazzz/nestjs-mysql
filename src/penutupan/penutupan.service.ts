@@ -67,7 +67,16 @@ export class PenutupanService {
   }
 
   async update(id: number, updatePenutupanDto: UpdatePenutupanDto) {
-    return this.penutupanRepository.update(id, updatePenutupanDto);
+    const update = await this.penutupanRepository.update(id, updatePenutupanDto)
+    
+    if (update.affected === 0) {
+      return {message: 'Tutup Jalan Form not found or no changes made', updated: 0};
+    }
+    
+    return {
+      message: 'Tutup Jalan Form updated successfully',
+      updated: update.affected
+    };
   }
 
   async remove(id: number) {

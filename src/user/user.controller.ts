@@ -1,6 +1,7 @@
-import { Body, Controller, Delete, Get, Param, Post } from '@nestjs/common';
+import { Body, Controller, Delete, Get, Param, Patch, Post } from '@nestjs/common';
 import { UserService } from './user.service';
 import { User } from './user.entity';
+import { UpdateFormDto } from './dto/update-form-status.dto';
 
 @Controller('form')
 export class UserController {
@@ -28,4 +29,12 @@ W
     remove(id: number): Promise<void>{
         return this.userService.remove(id)
     }
+
+    @Patch(':id')
+    update(@Param('id')id: number, @Body() updateFormDto: UpdateFormDto){
+        return this.userService.update(id, updateFormDto);
+    }
+    
+
+
 }

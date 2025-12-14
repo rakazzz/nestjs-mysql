@@ -8,6 +8,7 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 @Module({
   imports:[TypeOrmModule.forFeature([Penutupan, User])],
   controllers: [PenutupanController],
+  exports: [PenutupanService],
   providers: [PenutupanService],
 })
 export class PenutupanModule {}

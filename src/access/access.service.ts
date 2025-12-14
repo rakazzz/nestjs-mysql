@@ -31,9 +31,17 @@ export class AccessService {
         return user;
     
     }
+
+    async findByToken(refreshToken: string){
+        return this.accessRepository.findOne({where: {refresh_token: refreshToken}});
+    }
     
     async create(access: CreateAccessDto){
         // this.accessRepository.create(access)
         return this.accessRepository.save(access);
+    }
+
+    async updateRefreshToken(id: number, refresh_token: string){
+        return this.accessRepository.update(id, {refresh_token: refresh_token});
     }
 }

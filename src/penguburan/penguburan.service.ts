@@ -71,7 +71,16 @@ export class PenguburanService {
   }
 
   async update(id: number, updatePenguburanDto: UpdatePenguburanDto) {
-    return this.penguburanRepository.update(id, updatePenguburanDto);
+    const update = await this.penguburanRepository.update(id, updatePenguburanDto)
+
+    if (update.affected === 0) {
+      return {message: 'Penguburan not found or no changes made', updated: 0};
+    }
+
+    return {
+      message: 'Penguburan Form updated successfully',
+      updated: update.affected
+    };
   }
 
   async remove(id: number) {

@@ -76,7 +76,16 @@ export class JandaFormService {
   }
 
   async update(id: number, updateJandaFormDto: UpdateJandaFormDto) {
-    return this.jandaRepository.update(id, updateJandaFormDto);
+    const update = await this.jandaRepository.update(id, updateJandaFormDto)
+
+    if (update.affected === 0) {
+      return {message: 'Janda Form not found or no changes made', updated: 0};
+    } 
+
+    return {
+      message: 'Janda Form updated successfully',
+      updated: update.affected
+    };
   }
 
   async remove(id: number) {

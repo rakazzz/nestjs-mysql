@@ -9,6 +9,7 @@ import { JwtAuthGuard } from 'src/auth/jwt-auth.guard';
 
 @Module({
   imports:[TypeOrmModule.forFeature([JandaForm, User])],
+  exports: [JandaFormService],
   controllers: [JandaFormController],
   providers: [
     JandaFormService,

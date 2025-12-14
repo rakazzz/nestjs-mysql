@@ -1,4 +1,4 @@
-import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
+import { HttpException, HttpStatus, Injectable, UnauthorizedException } from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
 import { AccessService } from 'src/access/access.service';
 import * as bcrypt from 'bcrypt';
@@ -27,7 +27,7 @@ export class AuthService {
         if(!isPassValid){
             throw new HttpException('Invalid password!', HttpStatus.UNAUTHORIZED);
         }
-        const payload = { username: user.username, sub: user.id };
+        const payload = { username: user.username, sub: user.id , refresh_token: user.refresh_token};
         return payload;
 
         // if (user && user.password === pass) {
@@ -43,6 +43,7 @@ export class AuthService {
         return {
             username: payload.username,
             access_token: this.jwtService.sign(payload),
+            refresh_token: await this.createRefreshToken(user),
             id: payload.sub
         }
     }
@@ -50,8 +51,35 @@ export class AuthService {
     async signup(payload: CreateAccessDto){
         const hashPass  = await bcrypt.hash(payload.password, this.hashRound);
 
-        const payloadWithHash = {...payload, password: hashPass};
+        const payloadWithHash = {username: payload.username, password: hashPass, refresh_token: ''}; ;
         return this.accessService.create(payloadWithHash);
+    }
+
+    async createRefreshToken(user: any){
+        const refreshToken = this.jwtService.sign({}, {expiresIn: '1d'});
+        user.refresh_token = refreshToken;
+        await this.accessService.updateRefreshToken(user.sub, refreshToken);
+        return refreshToken;
+    }
+
+    async refreshAccessToken(refreshToken: string){
+        try{
+            const decode = this.jwtService.verify(refreshToken);
+            const user = await this.accessService.findByToken(refreshToken)
+
+            if(!user){
+                throw new UnauthorizedException('Invalid Refresh Token!');
+            }
+
+            const payload = {username: user.username, sub: user.id};
+            return {
+                access_token: this.jwtService.sign(payload),
+            };
+        }catch(e){
+            throw new UnauthorizedException({message: 'Expired or Invalid Refresh Token!',
+                error: e.message
+            });
+        }
     }
 
 }
