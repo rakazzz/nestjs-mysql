@@ -57,7 +57,7 @@ export class AuthService {
     }
 
     async createRefreshToken(user: any){
-        const refreshToken = this.jwtService.sign({}, {expiresIn: '120s'});
+        const refreshToken = this.jwtService.sign({}, {expiresIn: '1d'});
         user.refresh_token = refreshToken;
         await this.accessService.updateRefreshToken(user.sub, refreshToken);
         return refreshToken;
