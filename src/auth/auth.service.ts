@@ -27,7 +27,7 @@ export class AuthService {
         if(!isPassValid){
             throw new HttpException('Invalid password!', HttpStatus.UNAUTHORIZED);
         }
-        const payload = { username: user.username, sub: user.id , refresh_token: user.refresh_token};
+        const payload = { fullname: user.fullname, username: user.username, sub: user.id , refresh_token: user.refresh_token};
         return payload;
 
         // if (user && user.password === pass) {
@@ -39,8 +39,9 @@ export class AuthService {
     }
 
     async login(user: any){
-        const payload = {username: user.username, sub: user.sub};
+        const payload = {fullname: user.fullname, username: user.username, sub: user.sub};
         return {
+            fullname: payload.fullname,
             username: payload.username,
             access_token: this.jwtService.sign(payload),
             refresh_token: await this.createRefreshToken(user),
@@ -51,12 +52,12 @@ export class AuthService {
     async signup(payload: CreateAccessDto){
         const hashPass  = await bcrypt.hash(payload.password, this.hashRound);
 
-        const payloadWithHash = {username: payload.username, password: hashPass, refresh_token: ''}; ;
+        const payloadWithHash = {fullname: payload.fullname, username: payload.username, password: hashPass, refresh_token: ''}; ;
         return this.accessService.create(payloadWithHash);
     }
 
     async createRefreshToken(user: any){
-        const refreshToken = this.jwtService.sign({}, {expiresIn: '1d'});
+        const refreshToken = this.jwtService.sign({}, {expiresIn: '120s'});
         user.refresh_token = refreshToken;
         await this.accessService.updateRefreshToken(user.sub, refreshToken);
         return refreshToken;

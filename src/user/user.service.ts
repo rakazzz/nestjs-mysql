@@ -34,11 +34,12 @@ export class UserService {
                 suketPenguburanPemohon: true,
                 suketKeramaianPemohon: true,
                 suketPenutupanPemohon: true,
-            }
+            },
+            
         });
     }
 
-    async findDataByNik(nikUser: string){
+    async findDataByNik(nikUser: string){       
         const userData = await this.userRepository.findOne({
             where:{nik: nikUser},
             relations: {
@@ -46,7 +47,7 @@ export class UserService {
                 suketPenguburanPemohon: true,
                 suketKeramaianPemohon: true,
                 suketPenutupanPemohon: true,
-            }
+            },
         });
 
         if (!userData){

@@ -15,7 +15,7 @@ export class LocalStrategy extends PassportStrategy(Strategy) {
     if (!user) {
       throw new UnauthorizedException();
     }
-    const payload = { username: user.username, sub: user.sub, refresh_token: user.refresh_token};
+    const payload = { fullname: user.fullname, username: user.username, sub: user.sub, refresh_token: user.refresh_token};
     return payload;
   }
 }

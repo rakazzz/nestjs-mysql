@@ -3,9 +3,13 @@ import { IsString, MaxLength, MinLength } from "class-validator";
 
 export class CreateAccessDto {
     @IsString()
+    @MaxLength(30)
+    readonly fullname!: string;
+
+    @IsString()
     @MaxLength(20)
-    readonly username: string;
+    readonly username!: string;
 
     @MinLength(6)
-    readonly password: string;
+    readonly password!: string;
 }

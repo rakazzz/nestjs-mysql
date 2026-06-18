@@ -7,6 +7,9 @@ export class Access {
     id: number;
     
     @Column()
+    fullname: string;
+    
+    @Column()
     username: string;
 
     @Column()

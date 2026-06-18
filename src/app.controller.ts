@@ -33,6 +33,7 @@ export class AppController {
 
   }
 
+  @Public()
   @Post('auth/signup')
   async signup(@Request() req) {
     return this.authService.signup(req.body);
